@@ -1,3 +1,4 @@
+# PyTorch : voir README pour l'installation GPU
 pose2sim
 opencv-python
 numpy
