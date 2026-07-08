@@ -37,3 +37,10 @@ data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Données volumineuses
+data/
+
+# Fichiers générés
+*.png
+*.pth
