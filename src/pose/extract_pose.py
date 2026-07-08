@@ -1,6 +1,8 @@
 import cv2
 from Pose2Sim import Pose2Sim
 from rtmlib import Body, draw_skeleton
+import json
+import numpy as np
 
 def load_video(video_path):
     cap = cv2.VideoCapture(video_path)
@@ -61,7 +63,37 @@ def estimate_pose_2d(video_path):
     cap.release()
     cv2.destroyAllWindows()
 
+def save_keypoints(video_path, output_path):
+    detector = Body(mode='performance')
+
+    cap =cv2.VideoCapture(video_path)
+    keypoints_list = []
+    frame_idx = 0
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        keypoints, scores = detector(frame)
+
+        keypoints_list.append({
+            "frame": frame_idx,
+            "keypoints": keypoints.tolist(),
+            "scores": scores.tolist()
+        })
+
+        frame_idx += 1
+        print(f"Processed frame {frame_idx}")
+
+    cap.release()
+
+    with open(output_path, 'w') as f:
+        json.dump(keypoints_list, f)
+    print(f"Keypoints saved to {output_path}")
+
 if __name__ == "__main__":
     load_video("data/test.mp4")
     # show_video("data/test.mp4")
-    estimate_pose_2d("data/test.mp4")
+    # estimate_pose_2d("data/test.mp4")
+    save_keypoints("data/test.mp4", "data/keypoints_2d.json")
