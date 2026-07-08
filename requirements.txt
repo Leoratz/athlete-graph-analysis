@@ -1,5 +1,5 @@
 # PyTorch : voir README pour l'installation GPU
-pose2sim
+Pose2Sim
 opencv-python
 numpy
 matplotlib
