@@ -1,0 +1,8 @@
+pose2sim
+opencv-python
+numpy
+matplotlib
+plotly
+torch
+torch-geometric
+streamlit

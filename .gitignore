@@ -1,0 +1,39 @@
+# Environnement virtuel
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (trop lourde pour Git)
+data/
+*.mp4
+*.avi
+*.mov
+*.json
+
+# Modèles entraînés
+*.pt
+*.pth
+*.pkl
+
+# OpenSim
+*.osim
+*.mot
+*.sto
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
