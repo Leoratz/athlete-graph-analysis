@@ -1,4 +1,6 @@
 import cv2
+from Pose2Sim import Pose2Sim
+from rtmlib import Body, draw_skeleton
 
 def load_video(video_path):
     cap = cv2.VideoCapture(video_path)
@@ -36,6 +38,30 @@ def show_video(video_path):
     cap.release()
     cv2.destroyAllWindows()
 
+def estimate_pose_2d(video_path):
+    detector = Body(mode='performance', to_openpose=False, backend='onnxruntime', device='cuda')
+    
+    cap = cv2.VideoCapture(video_path)
+    
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+        
+        keypoints, scores = detector(frame)
+        
+        frame = draw_skeleton(frame, keypoints, scores, kpt_thr=0.3)
+
+        frame_resized = cv2.resize(frame, (640, 360))
+        cv2.imshow("Pose 2D", frame_resized)
+        
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
+    
+    cap.release()
+    cv2.destroyAllWindows()
+
 if __name__ == "__main__":
     load_video("data/test.mp4")
-    show_video("data/test.mp4")
+    # show_video("data/test.mp4")
+    estimate_pose_2d("data/test.mp4")

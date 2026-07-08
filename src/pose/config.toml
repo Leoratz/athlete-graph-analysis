@@ -1,0 +1,12 @@
+[project]
+project_dir = "data/"
+
+[pose]
+vid_img_extension = "mp4"
+overwrite_pose = true
+
+[triangulation]
+reorder_trc = false
+
+[filtering]
+type = "butterworth"
